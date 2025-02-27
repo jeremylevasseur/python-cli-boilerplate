@@ -1,0 +1,3 @@
+[lint]
+# Ignore E731: Do not assign a lambda expression, use a `def`
+ignore = ["E731"]

@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
+  "editor.tabSize": 2,
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never",
+      "source.sortImports": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "ruff.organizeImports": false,
+  "ruff.lint.preview": true,
+  "ruff.configuration": ".vscode/ruff.toml",
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.args": ["--config-file=.mypy.ini"],
+  "mypy-type-checker.severity": { "error": "Warning" },
+  "redhat.telemetry.enabled": false,
+  "python.testing.unittestArgs": ["-v", "-s", "./tests", "-p", "test_*.py"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
+}
