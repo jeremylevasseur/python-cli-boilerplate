@@ -44,11 +44,11 @@ install: ## Installs the Python dependencies
 
 .PHONY: cli-help
 cli-help: ## Run the CLI tool with the help flag
-	poetry run python ./main.py --help
+	@poetry run python ./main.py --help
 
 .PHONY: run
 run: ## Run the CLI tool
-	poetry run python ./main.py
+	@poetry run python ./main.py
 
 
 # Checking, Linting, and Formating Targets
@@ -80,6 +80,10 @@ check-lockfile: ## Compares lock file with pyproject.toml
 .PHONY: clean
 clean: ## Deletes the .venv directory and the poetry.lock file
 	rm -rf .venv && rm poetry.lock
+
+.PHONY: clean-cache
+clean-cache: ## Deletes all Python cache directories
+	find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete && rm -rf .pytest_cache
 
 
 # Publish Version Targets
