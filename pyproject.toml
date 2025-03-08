@@ -1,30 +1,24 @@
-[tool.poetry]
+[project]
 name = "python-cli-boilerplate"
 version = "0.0.1"
 description = "A boilerplate for Python CLI applications."
-authors = ["Jeremy Levasseur"]
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic-settings>=2.8.1",
+  "pydantic>=2.10.6",
+  "rich>=13.9.4",
+  "tqdm>=4.67.0",
+  "typer>=0.15.1",
+  "art>=6.4"
+]
 
-[tool.poetry.dependencies]
-python = "3.11.11"
-pydantic = "^2.10.6"
-pydantic-settings = "^2.8.1"
-rich = "^13.9.4"
-tqdm = "^4.67.0"
-typer = "^0.15.1"
-
-[tool.poetry.group.dev.dependencies]
-deptry = "^0.16.1"
-pre-commit = "^4.0.1"
-ruff = "^0.7.4"
-
-[tool.poetry.group.lint.dependencies]
-mypy = "1.13.0"
-ruff = "^0.7.4"
-
-[tool.poetry-sort]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+  "deptry>=0.16.1",
+  "pre-commit>=4.0.1"
+]
+lint = [
+  "mypy==1.13.0",
+  "ruff>=0.7.4"
+]

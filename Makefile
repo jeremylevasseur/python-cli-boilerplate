@@ -33,10 +33,10 @@ targets:
 # ----------------------------------------
 
 .PHONY: install
-install: ## Installs the Python dependencies
-	poetry install
-	poetry run pre-commit install
-	poetry run pre-commit install --hook-type pre-commit --hook-type pre-push
+install: ## Installs the API dependencies
+	uv sync --all-groups --all-extras
+	uv run pre-commit install
+	uv run pre-commit install --hook-type pre-commit --hook-type pre-push
 
 
 # Script Execution Targets
@@ -44,42 +44,55 @@ install: ## Installs the Python dependencies
 
 .PHONY: cli-help
 cli-help: ## Run the CLI tool with the help flag
-	@poetry run python ./main.py --help
+	@uv run python ./main.py --help
 
 .PHONY: run
 run: ## Run the CLI tool
-	@poetry run python ./main.py
+	@uv run python ./main.py
 
 
 # Checking, Linting, and Formating Targets
 # ----------------------------------------
 
+.PHONY: type-check
+type-check: ## Run type checker
+	uv run mypy .
+
 .PHONY: lint-format
-lint-format: lint-fix format ## Run linter and formatter
+lint-format: lint-fix sort-imports ## Run linter and formatter
 
 .PHONY: lint
 lint: ## Run linter
-	poetry run ruff check
+	uv run ruff check
 
 .PHONY: lint-fix
 lint-fix: ## Run linter and fix any minor issues
-	poetry run ruff check --fix
+	uv run ruff check --fix
+
+.PHONY: sort-imports
+sort-imports: ## Sort imports
+	uv run ruff check --select I --fix
+	make format
 
 .PHONY: format
 format: ## Run code formatter
-	poetry run ruff format
+	uv run ruff format
+
+.PHONY: mypy
+mypy: ## Run type checker
+	uv run mypy ./ --config-file=.mypy.ini
 
 .PHONY: check-lockfile
 check-lockfile: ## Compares lock file with pyproject.toml
-	poetry check --lock
+	uv lock --check
 
 
 # Clean Targets
 # ----------------------------------------
 
 .PHONY: clean
-clean: ## Deletes the .venv directory and the poetry.lock file
-	rm -rf .venv && rm poetry.lock
+clean: ## Deletes the .venv directory and the uv.lock file
+	rm -rf .venv && rm uv.lock
 
 .PHONY: clean-cache
 clean-cache: ## Deletes all Python cache directories

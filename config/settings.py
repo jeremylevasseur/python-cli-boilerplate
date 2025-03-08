@@ -12,7 +12,10 @@ class Config(BaseConfig):
     DEFAULT_LOCALE: Locale = Locale.EN_US
     ENVIRONMENT: str = EnvironmentType.DEVELOPMENT
     APP_NAME: str = "python-cli-boilerplate"
+    APP_DISPLAY_NAME: str = "Python CLI Boilerplate"
     RELEASE_VERSION: str = "0.0.1"
 
+    NO_ARGS_IS_HELP: bool = True
 
-config: Config = Config()
+
+settings: Config = Config()

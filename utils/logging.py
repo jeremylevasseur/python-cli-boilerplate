@@ -3,7 +3,7 @@ from typing import Any
 from rich.console import Console
 from rich.theme import Theme
 
-from config import config
+from config import settings
 from constants import LogJustifyMethod, LogLevel
 
 log_theme = Theme(
@@ -21,7 +21,9 @@ log_theme = Theme(
 class Log:
     def __init__(self) -> None:
         self.console = Console(
-            theme=log_theme, log_time=False, log_path=True if config.DEBUG else False
+            theme=log_theme,
+            log_time=False,
+            log_path=True if settings.DEBUG else False,
         )
 
     def _log(
