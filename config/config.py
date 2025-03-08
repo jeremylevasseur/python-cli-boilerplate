@@ -18,4 +18,4 @@ class Config(BaseConfig):
     NO_ARGS_IS_HELP: bool = True
 
 
-settings: Config = Config()
+config: Config = Config()
